@@ -9,6 +9,7 @@ interface ExecutionLog {
 
 function App() {
   const [task, setTask] = useState('');
+  const [model, setModel] = useState('gpt-4o-mini');
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [logs, setLogs] = useState<ExecutionLog[]>([]);
@@ -26,7 +27,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ task }),
+        body: JSON.stringify({ task, model }),
       });
 
       if (!response.ok) {
@@ -75,7 +76,27 @@ function App() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                   disabled={isLoading}
                 />
-              </div>
+            </div>
+
+            <div>
+              <label 
+                htmlFor="model" 
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                モデルを選択してください
+              </label>
+              <select
+                id="model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                disabled={isLoading}
+              >
+                <option value="gpt-4o-mini">gpt-4o-mini</option>
+                <option value="gpt-4o">gpt-4o</option>
+                <option value="gpt-3.5">gpt-3.5</option>
+              </select>
+            </div>
             </div>
             
             <button

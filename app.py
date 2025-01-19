@@ -17,7 +17,7 @@ CORS(app)
 def execute():
     data = request.json
     task = data.get('task') + " 日本語で回答してください。"
-    model = "gpt-4o-mini"
+    model = data.get('model')
     result = asyncio.run(run_agent(task, model))
     result_json_str = json.dumps(result, default=lambda o: o.__dict__, indent=4, ensure_ascii=False)
     return result_json_str
