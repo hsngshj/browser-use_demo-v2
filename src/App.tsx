@@ -37,7 +37,7 @@ function App() {
       const data = await response.text();
       const parsedData = JSON.parse(data);
       const extractedContent = parsedData.history[parsedData.history.length - 1].result[0].extracted_content;
-      setResult(extractedContent);
+      setResult(extractedContent || "回答を生成できませんでした");
       setLogs([parsedData]);
     } catch (error) {
       console.error('Error executing task:', error);
