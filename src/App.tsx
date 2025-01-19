@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { exec } from 'child_process';
 import { Send, Loader2, ChevronDown, ChevronRight } from 'lucide-react';
 
 interface ExecutionLog {
@@ -21,7 +22,7 @@ function App() {
     setResult(null);
     
     try {
-      const response = await fetch('/api/execute', {
+      const response = await fetch('http://localhost:5000/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,9 +34,11 @@ function App() {
         throw new Error('API request failed');
       }
 
-      const data = await response.json();
-      setResult(data.result);
-      setLogs(data.logs || []);
+      const data = await response.text();
+      const parsedData = JSON.parse(data);
+      const extractedContent = parsedData.history[parsedData.history.length - 1].result[0].extracted_content;
+      setResult(extractedContent);
+      setLogs([parsedData]);
     } catch (error) {
       console.error('Error executing task:', error);
       setResult('エラーが発生しました。もう一度お試しください。');
@@ -101,7 +104,7 @@ function App() {
                 実行結果
               </h2>
               <div className="bg-gray-50 rounded-lg p-4 whitespace-pre-line">
-                {result}
+                <pre>{result}</pre>
               </div>
             </div>
           )}
@@ -121,15 +124,13 @@ function App() {
               </button>
               {isLogsVisible && (
                 <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">
-                  {logs.map((log, index) => (
-                    <div key={index} className="mb-2">
-                      <span className="text-blue-400">{log.timestamp}</span>
-                      <span className="text-green-400"> [{log.step}]</span>
+                  {logs.length > 0 && (
+                    <div className="mb-2">
                       <pre className="text-gray-300 mt-1">
-                        {JSON.stringify(log.details, null, 2)}
+                        {JSON.stringify(logs[0], null, 2)}
                       </pre>
                     </div>
-                  ))}
+                  )}
                   {isLoading && (
                     <div className="flex items-center gap-2 text-gray-400">
                       <Loader2 className="w-4 h-4 animate-spin" />
