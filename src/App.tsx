@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { exec } from 'child_process';
 import { Send, Loader2, ChevronDown, ChevronRight } from 'lucide-react';
 
 interface ExecutionLog {
