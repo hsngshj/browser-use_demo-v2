@@ -67,15 +67,15 @@ function App() {
                 実行したいタスクを入力してください
               </label>
               <div className="relative">
-                <input
-                  id="task"
-                  type="text"
-                  value={task}
-                  onChange={(e) => setTask(e.target.value)}
-                  placeholder="例: 東京都の居酒屋を教えて"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                  disabled={isLoading}
-                />
+<textarea
+  id="task"
+  value={task}
+  onChange={(e) => setTask(e.target.value)}
+  placeholder="例: 東京都の居酒屋を教えて"
+  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+  disabled={isLoading}
+  rows={4}
+/>
             </div>
 
             <div>
