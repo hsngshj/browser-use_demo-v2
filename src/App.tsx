@@ -40,8 +40,14 @@ function App() {
       setResult(extractedContent || "回答を生成できませんでした");
       setLogs([parsedData]);
     } catch (error) {
-      console.error('Error executing task:', error);
       setResult('エラーが発生しました。もう一度お試しください。');
+      setLogs([{
+        timestamp: new Date().toISOString(),
+        step: 'error',
+        details: {
+          message: 'API request failed'
+        }
+      }]);
     } finally {
       setIsLoading(false);
     }
@@ -129,36 +135,15 @@ function App() {
             </div>
           )}
 
-          {(logs.length > 0 || isLoading) && (
+          {logs.length > 0 && (
             <div className="mt-8">
-              <button
-                onClick={() => setIsLogsVisible(!isLogsVisible)}
-                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2 hover:text-gray-900"
-              >
-                {isLogsVisible ? (
-                  <ChevronDown className="w-4 h-4" />
-                ) : (
-                  <ChevronRight className="w-4 h-4" />
-                )}
-                実行ログ
-              </button>
-              {isLogsVisible && (
-                <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">
-                  {logs.length > 0 && (
-                    <div className="mb-2">
-                      <pre className="text-gray-300 mt-1">
-                        {JSON.stringify(logs[0], null, 2)}
-                      </pre>
-                    </div>
-                  )}
-                  {isLoading && (
-                    <div className="flex items-center gap-2 text-gray-400">
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      処理中...
-                    </div>
-                  )}
+              <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm text-gray-200 overflow-x-auto">
+                <div className="mb-2">
+                  <pre className="text-gray-300 mt-1">
+                    {JSON.stringify(logs[0], null, 2)}
+                  </pre>
                 </div>
-              )}
+              </div>
             </div>
           )}
         </div>
