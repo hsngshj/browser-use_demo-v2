@@ -1,37 +1,61 @@
-# browser-use_demo-v2
+# Browser Use Demo v2
 
-## Development
+## 概要
+このプロジェクトは、Browser-use を使用したデモアプリケーションです。
+以下のデモ動画の通り、ユーザーがWEBブラウザ上でやりたいタスクを入力し、LLMがそのタスクを自動実行します。
 
-### How to start
-1. Install libraries
-```
+<iframe src="https://drive.google.com/file/d/1bg16_FQcVuJ6hsI5CxYMnoJvmXomTUKK/preview" width="640" height="480" allow="autoplay"></iframe>
+
+## 目次
+1. [開発環境のセットアップ](#開発環境のセットアップ)
+2. [本番環境のビルドとデプロイ](#本番環境のビルドとデプロイ)
+
+## 開発環境のセットアップ
+
+### 必要なツール
+- Node.js (v18以上)
+- Python (v3.9以上)
+- npm (v9以上)
+
+### セットアップ手順
+1. 依存パッケージのインストール
+```bash
+# フロントエンドの依存パッケージをインストール
 npm install
+
+# バックエンドの依存パッケージをインストール
 pip install -r requirements.txt
 ```
-2. Run Backend-server
-```
+
+2. バックエンドサーバーの起動
+```bash
 python app.py
 ```
-3. Run Frontend-server
-```
+
+3. フロントエンドサーバーの起動
+```bash
 npm run dev
 ```
-4. Go to http://localhost:5173/
 
-## Production
+4. アプリケーションにアクセス
+- ブラウザで http://localhost:5173/ にアクセス
 
-### Build
-```
+## 本番環境のビルドとデプロイ
+
+### ビルド手順
+```bash
 npm run build
 ```
 
-### Preview
-```
+### プレビュー
+```bash
 npm run preview
 ```
-- Access: http://localhost:4173/
+- ブラウザで http://localhost:4173/ にアクセス
 
-### Deployment
-- The production build files will be generated in the `dist` directory
-- Deploy the contents of the `dist` directory to your production server
-- Make sure to configure environment variables in `.env.production`
+### デプロイ手順
+1. `dist`ディレクトリに本番用ビルドファイルが生成されます
+2. `dist`ディレクトリの内容を本番サーバーにデプロイ
+3. 環境変数の設定
+   - `.env.production`ファイルを作成
+   - 必要な環境変数を設定（例：APIエンドポイント、認証情報など）
