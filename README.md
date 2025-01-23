@@ -4,7 +4,7 @@
 このプロジェクトは、Browser-use を使用したデモアプリケーションです。
 以下のデモ動画の通り、ユーザーがWEBブラウザ上でやりたいタスクを入力し、LLMがそのタスクを自動実行します。
 
-[![Demo Video](https://img.youtube.com/vi/1bg16_FQcVuJ6hsI5CxYMnoJvmXomTUKK/0.jpg)](https://drive.google.com/file/d/1bg16_FQcVuJ6hsI5CxYMnoJvmXomTUKK/view?usp=sharing)
+[![Demo Video]](https://drive.google.com/file/d/1bg16_FQcVuJ6hsI5CxYMnoJvmXomTUKK/view?usp=sharing)
 
 ## 目次
 1. [開発環境のセットアップ](#開発環境のセットアップ)
